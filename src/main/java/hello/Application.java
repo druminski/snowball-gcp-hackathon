@@ -134,19 +134,36 @@ public class Application {
 
     // is someone on target
     if (myState.direction.equals("N")) {
-        for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
-            if (entry.getValue().x == myState.x && myState.y - entry.getValue().y <= 3 && myState.y - entry.getValue().y >= 1) {
-                return "T";
+        if (myState.wasHit && myState.y > 2) {
+            if (myState.y > 2) {
+                return "F";
+            } else {
+                return "R";
+            }
+        } else {
+            for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
+                if (entry.getValue().x == myState.x && myState.y - entry.getValue().y <= 3 && myState.y - entry.getValue().y >= 1) {
+                    return "T";
+                }
             }
         }
+
         if (myState.y > 2) {
             return "F";
         }
     }
     else if (myState.direction.equals("S")) {
-        for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
-            if (entry.getValue().x == myState.x && entry.getValue().y - myState.y <= 3 && entry.getValue().y - myState.y >= 1) {
-                return "T";
+        if (myState.wasHit) {
+            if (myState.y < arenaUpdate.arena.dims.get(1) - 2) {
+                return "F";
+            } else {
+                return "R";
+            }
+        } else {
+            for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
+                if (entry.getValue().x == myState.x && entry.getValue().y - myState.y <= 3 && entry.getValue().y - myState.y >= 1) {
+                    return "T";
+                }
             }
         }
         if (myState.y < arenaUpdate.arena.dims.get(1) - 2) {
@@ -154,9 +171,17 @@ public class Application {
         }
     }
     else if (myState.direction.equals("E")) {
-        for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
-            if (entry.getValue().y == myState.y && entry.getValue().x - myState.x <= 3 && entry.getValue().x - myState.x >= 1) {
-                return "T";
+        if (myState.wasHit) {
+            if (myState.x < (arenaUpdate.arena.dims.get(0) - 2)) {
+                return "F";
+            } else {
+                return "R";
+            }
+        } else {
+            for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
+                if (entry.getValue().y == myState.y && entry.getValue().x - myState.x <= 3 && entry.getValue().x - myState.x >= 1) {
+                    return "T";
+                }
             }
         }
         if (myState.x < (arenaUpdate.arena.dims.get(0) - 2)) {
@@ -164,9 +189,17 @@ public class Application {
         }
     }
     else if (myState.direction.equals("W")) {
-        for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
-            if (entry.getValue().y == myState.y && myState.x - entry.getValue().x <= 3 && myState.x - entry.getValue().x >= 1) {
-                return "T";
+        if (myState.wasHit) {
+            if (myState.x > 2) {
+                return "F";
+            } else {
+                return "R";
+            }
+        } else {
+            for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
+                if (entry.getValue().y == myState.y && myState.x - entry.getValue().x <= 3 && myState.x - entry.getValue().x >= 1) {
+                    return "T";
+                }
             }
         }
         if (myState.x > 2) {
