@@ -3,11 +3,14 @@ package hello;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @SpringBootApplication
 @RestController
@@ -59,9 +62,9 @@ public class Application {
 
     // find mine position
     PlayerState myState = arenaUpdate.arena.state.get(arenaUpdate._links.self.href);
-    
+
     // is someone on target
-    if (myState.direction == "N") {
+    if (myState.direction.equals("N")) {
         for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
             if (entry.getValue().x == myState.x && myState.y - entry.getValue().y <= 3 && myState.y - entry.getValue().y >= 1) {
                 return "T";
@@ -71,7 +74,7 @@ public class Application {
             return "F";
         }
     }
-    else if (myState.direction == "S") {
+    else if (myState.direction.equals("S")) {
         for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
             if (entry.getValue().x == myState.x && entry.getValue().y - myState.y <= 3 && entry.getValue().y - myState.y >= 1) {
                 return "T";
@@ -81,7 +84,7 @@ public class Application {
             return "F";
         }
     }
-    else if (myState.direction == "E") {
+    else if (myState.direction.equals("E")) {
         for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
             if (entry.getValue().y == myState.y && entry.getValue().x - myState.x <= 3 && entry.getValue().x - myState.x >= 1) {
                 return "T";
@@ -91,7 +94,7 @@ public class Application {
             return "F";
         }
     }
-    else if (myState.direction == "W") {
+    else if (myState.direction.equals("W")) {
         for (Map.Entry<String, PlayerState> entry : arenaUpdate.arena.state.entrySet()) {
             if (entry.getValue().y == myState.y && myState.x - entry.getValue().x <= 3 && myState.x - entry.getValue().x >= 1) {
                 return "T";
@@ -101,7 +104,7 @@ public class Application {
             return "F";
         }
     }
-    
+
     return "R";
 
     // if (myState.x < arenaUpdate.arena.dims.get(0))
