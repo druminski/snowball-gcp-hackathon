@@ -80,7 +80,7 @@ public class Application {
                 return "T";
             }
         }
-        if (myState.x < arenaUpdate.arena.dims.get(1) - 2) {
+        if (myState.y < arenaUpdate.arena.dims.get(1) - 2) {
             return "F";
         }
     }
