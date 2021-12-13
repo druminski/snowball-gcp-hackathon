@@ -70,7 +70,7 @@ public class Application {
                 return "T";
             }
         }
-        if (myState.y > arenaUpdate.arena.dims.get(0) + 2) {
+        if (myState.y > 2) {
             return "F";
         }
     }
@@ -100,7 +100,7 @@ public class Application {
                 return "T";
             }
         }
-        if (myState.x > arenaUpdate.arena.dims.get(0) + 2) {
+        if (myState.x > 2) {
             return "F";
         }
     }
